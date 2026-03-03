@@ -23,14 +23,13 @@ const cusschema = mongoose.Schema(
 );
 
 cusschema.pre("save", async function () {
-  //runs before every save() call  not only at the first save()
-  if (this.isModified("password")) {       //hashes password only when it has been changed.
+  if (this.isModified("password")) {      
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
   }
 });
 
-//how this.password knows exactly copare with which doc file:///Users/sanjaykardile/Downloads/mongoose_this_explanation.pdf
+
 cusschema.methods.matchPassword = async function (enteredpassword) {
   return await bcrypt.compare(enteredpassword, this.password);
 };

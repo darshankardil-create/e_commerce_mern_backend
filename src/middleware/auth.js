@@ -8,24 +8,16 @@ export async function authmiddleware(req, res, next) {
 
   if (
     req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer") // headers: { Authorization: `Bearer ${token}` },
+    req.headers.authorization.startsWith("Bearer")
   ) {
     try {
-      token = req.headers.authorization.split(" ")[1]; //req on me split token out of it "bearer abcd1234"
+      token = req.headers.authorization.split(" ")[1]; 
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      // decoded contains:
-      // {
-      //     "id": "69636a5fa7d06473f1e2ff92", payload
-      //     "iat": 1768122975,    issued at :timestamps
-      //     "exp": 1770714975       expiry
-      // }
 
-      req.authu = await Schema.findById(decoded.id).select("-password"); //give everyhing except password
-      //  ⬆️
-      // Middleware cannot directly send response for every route — some routes need the user info.
-      // By attaching req.authuser, all routes downstream can access it:
+      req.authu = await Schema.findById(decoded.id).select("-password"); 
+
 
       return next();
     } catch (error) {
@@ -44,5 +36,5 @@ export async function authmiddleware(req, res, next) {
 
 
 export function generateToken(id) {
-  return jwt.sign({id} , process.env.JWT_SECRET, { expiresIn: "30d" }); //header includes algrithm and type:jwt/payload/sign
+  return jwt.sign({id} , process.env.JWT_SECRET, { expiresIn: "30d" }); 
 }

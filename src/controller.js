@@ -44,11 +44,11 @@ export async function postdataregister(req, res) {
       return res.status(400).json({ message: "user already exist" });
     }
 
-    const postdata = new customerSchema(req.body); //create
+    const postdata = new customerSchema(req.body); 
 
-    const savepostdata = await postdata.save(); //save()
+    const savepostdata = await postdata.save(); 
     
-    const token = generateToken(savepostdata._id); //gen token
+    const token = generateToken(savepostdata._id); 
 
     res.status(201).json({ savepostdata: savepostdata, token: token });
   } catch (error) {
@@ -215,5 +215,3 @@ export async function updatepostforcheck(req, res) {
   }
 }
 
-//How do we get access to req and res inside a function in Express?
-//ans- file:///Users/sanjaykardile/Desktop/Screenshot%202025-12-27%20at%2012.42.48%20PM.png
