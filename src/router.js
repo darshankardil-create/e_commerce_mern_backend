@@ -19,10 +19,10 @@ const route=express.Router()
 route.get("/", getdata);
 route.get("/me", authmiddleware,protect);
 route.get("/:id",getdatabyid)  
-route.post("/register", postdataregister);//
+route.post("/register", postdataregister);
 route.put("/:id", updatedata);
 route.delete("/delete", deletedata);
-route.post("/login", postdatalogin);//
+route.post("/login", postdatalogin);
 route.post("/removespecificobj/:id",updatepostforcheck)
 route.post("/normalpost/:id",updatepost);
 

@@ -47,7 +47,7 @@ export async function postdataregister(req, res) {
     const postdata = new customerSchema(req.body); //create
 
     const savepostdata = await postdata.save(); //save()
-
+    
     const token = generateToken(savepostdata._id); //gen token
 
     res.status(201).json({ savepostdata: savepostdata, token: token });
@@ -160,8 +160,7 @@ export async function protect(req, res, next) {
 }
 
 export async function updatepost(req, res) {
-  const { Cart, position } = req.body;
-
+  const { Cart, position } = req.body;     //for add and chg qty in checkout used same api
 
   try {
     const postup = await customerSchema.findByIdAndUpdate(
@@ -169,10 +168,9 @@ export async function updatepost(req, res) {
 
       {
         $push: {
-          Cart: { $each: Cart, $position: position }, 
-        }
+          Cart: { $each: Cart, $position: position },
+        },
       },
-      { new: true },
     );
 
     if (!postup) {
@@ -185,26 +183,19 @@ export async function updatepost(req, res) {
   }
 }
 
-
-
-
-
-
-
 export async function updatepostforcheck(req, res) {
   const { proch } = req.body;
   const ids = proch.map((item) => item.id);
 
   if (!ids) return;
 
-
   try {
     const postup = await customerSchema.findByIdAndUpdate(
       req.params.id,
       {
         $pull: {
-          Cart: { id: { $in: ids } } 
-        }
+          Cart: { id: { $in: ids } },
+        },
       },
       { new: true },
     );
