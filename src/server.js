@@ -19,7 +19,7 @@ app.use(
     origin:[ "http://localhost:3001","https://darshankardil-create.github.io"] 
   })
 );
-
+app.set("trust proxy", 1);
 app.use(ratelimiter)
 
 app.use("/server", router);
