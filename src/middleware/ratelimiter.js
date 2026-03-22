@@ -11,7 +11,7 @@ const ratelimiternew = new Ratelimit({
 
 export async function ratelimiter(req, res, next) {
   try {
-    const { success } = await ratelimiternew.limit("job");
+    const { success } = await ratelimiternew.limit(req.ip);
 
     if (!success) {
       return res
