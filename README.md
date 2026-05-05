@@ -1,5 +1,18 @@
 # 🛒 E-Commerce Backend (MERN)
 
+## 🌐 Live Demo
+
+> *(https://darshankardil-create.github.io/E_commerce_fro_mern/)*
+
+---
+
+### 🔗 Project Repositories
+
+**Frontend:**  
+👉 https://github.com/darshankardil-create/E_commerce_fro_mern  
+
+---
+
 A **production-ready Node.js + Express backend** powering a full-stack E-commerce application.  
 Designed with **security, scalability, and clean API architecture** in mind.
 
